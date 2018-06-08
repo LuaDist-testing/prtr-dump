@@ -1,16 +1,16 @@
 -- This file was automatically generated for the LuaDist project.
 
 package = 'prtr-dump'
-version = '20121106-1'
+version = '20121212-1'
 -- LuaDist source
 source = {
-  tag = "20121106-1",
+  tag = "20121212-1",
   url = "git://github.com/LuaDist-testing/prtr-dump.git"
 }
 -- Original source
 -- source = {
--- 	url = 'http://hg.piratery.net/dump/get/fffac25193f641a1f6247f9ce7d3ab068327ebf5.tar.gz',
--- 	dir = 'doub-dump-fffac25193f6',
+-- 	url = 'http://hg.piratery.net/dump/get/f412db97ffcbac65a3ff21d2c99b563414499639.tar.gz',
+-- 	dir = 'doub-dump-f412db97ffcb',
 -- }
 description = {
 	summary = "A simple module to dump a Lua value to a string or a file.",

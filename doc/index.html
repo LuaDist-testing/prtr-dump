@@ -9,6 +9,7 @@ lang="en">
 <link rel="stylesheet" href="doc.css" type="text/css"/>
 </head>
 <body>
+
 <div class="chapter" id="header">
 <img width="128" height="128" alt="prtr-dump" src="logo.png"/>
 <p>A simple module to dump Lua values to strings and files</p>
@@ -28,7 +29,7 @@ lang="en">
 
 <h2>Support</h2>
 
-<p>All support is done through the <a href="http://www.lua.org/lua-l.html">Lua mailing list</a>. If the traffic becomes too important a specialized mailing list will be created.</p>
+<p>All support is done through the <a href="http://www.lua.org/lua-l.html">Lua mailing list</a>.</p>
 
 <p>Feel free to ask for further developments. I can't guarantee that I'll develop everything you ask, but I want my code to be as useful as possible, so I'll do my best to help you. You can also send me request or bug reports (for code and documentation) directly at <a href="mailto:jerome.vuarand@gmail.com">jerome.vuarand@gmail.com</a>.</p>
 
@@ -65,7 +66,7 @@ lang="en">
 
 <p>Tables are printed with indentation, recursively. Key-value pairs are ordered in a predictable way so that two identical tables will always be serialized to the same string or file. The key-value pairs are also ordered in a sensible way to improve reading of the data by a human (string keys come first, integer keys are omitted when compatible with an array constructor).</p>
 
-<p>Note that no reference comparison is done during the dump, so if a sub-table is referenced at several points inside a table structure, at re-loading time several identical but unrelated tables will be created. Also if the input table contain reference loops, the <code>dump.tostring</code> function will recurse infinitely (and probably be interrupted by a stack overflow error).</p>
+<p>Note that no reference comparison is done during the dump, so if a sub-table is referenced at several points inside a table structure, at re-loading time several identical but unrelated tables will be created. Also if the input table contain reference loops, the <code>dump</code> functions will recurse infinitely (and probably be interrupted by a stack overflow error).</p>
 
 <p>Finally very large tables will be serialized in a special way to avoid the limit on the number of constants in a Lua chunk. By default the key-value pairs will be grouped in chunks of 10 000. This may however be too large if the values are moderately large tables themselves. You can change the <code>dump.groupsize</code> variable dynamically to adjust that behaviour.</p>
 
@@ -87,20 +88,23 @@ lang="en">
 local s = dump.tostring(value)
 </code></pre>
 
-<h3>dump.tofile ( value, file )</h3>
+<h3>dump.tofile ( value, file )<br/>dump.tofile ( value, filename )</h3>
 
-<p>The <code>tofile</code> function takes a <code>value</code> and a <code>file</code> object as parameters. See <code>tostring</code> for a explanation of possible <code>values</code>. The <code>file</code> object can be any value that has a <code>write</code> method that takes a single <code>string</code> as parameter, for example the file objects of the Lua <code>io</code> library. The serialized value is prefixed with the string <code>"return "</code>, so that executing the file with for example <code>dofile</code> will return the equivalent value.</p>
+<p>The <code>tofile</code> function takes a <code>value</code> and a <code>file</code> object or a <code>filename</code> string as parameters. The <code>file</code> object can be any value that has a <code>write</code> method that takes a single <code>string</code> as parameter, for example the file objects of the Lua <code>io</code> library. If a string is passed as a second parameter, it is considered as a filename that will be open, written to and closed. The serialized value is prefixed with the string <code>"return "</code>, so that executing the file with for example <code>dofile</code> will return the equivalent value.</p>
 
 <pre><code>local file = io.open('value.lua')
 dump.tofile(value, file)
 file:close()
+
+dump.tofile(value, 'value.lua')
 </code></pre>
 
 </div>
 
 <div class="chapter" id="footer">
-<small>Last update: 2012-11-06 21:37:17 GMT</small>
+<small>Last update: 2012-12-09 19:58:32 GMT</small>
 </div>
+
 </body>
 </html>
 

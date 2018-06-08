@@ -289,13 +289,26 @@ function _M.tostring(value)
 end
 
 function _M.tofile(value, file)
+	local filename
+	if type(file)=='string' then
+		filename = file
+		file = nil
+	end
 	local success,err
+	if filename then
+		file,err = io.open(filename, 'wb')
+		if not file then return nil,err end
+	end
 	success,err = file:write"return "
 	if not success then return nil,err end
 	success,err = dumpvalue(value, function(...) return file:write(...) end, 0)
 	if not success then return nil,err end
 	success,err = file:write("\n-- v".."i: ft=lua\n")
 	if not success then return nil,err end
+	if filename then
+		success,err = file:close()
+		if not success then return nil,err end
+	end
 	return true
 end
 
