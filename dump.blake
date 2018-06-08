@@ -1,0 +1,6 @@
+return {
+	type = 'lua_module',
+	files = { "dump.lua" },
+}
+
+-- vi: filetype=lua
